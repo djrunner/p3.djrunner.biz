@@ -1,6 +1,6 @@
 var name;
-
 var distance;
+var direction;
 
 $('#location').click(function() {
 
@@ -18,27 +18,31 @@ $('#distance').click(function() {
 });
 
 $("input:radio[name=direction]").click(function() {
-    var direction = $(this).val();
+    direction =  "" + $(this).val();
     console.log(direction);
 });
 
 $('button').click(function()	{
 
-	console.log("button works!");
-	console.log(name);
-	console.log(distance);
+	if(direction == "south") {
+		var shelters_temp = shelters;
+		shelters_reversed = shelters.reverse();
+	}
 
+	for (var i = 0; i < shelters_reversed.length; i++) {
+		console.log(shelters_reversed[i]);
+	}
 
 	var start;
 
 	for (var i = 0; i < shelters.length; i++)	{
-		if (name = shelters[i][0])	{
+		if (name == shelters[i][0])	{
 			start = shelters[i][1];
 			break;
 		}
 	}
 
-	console.log(start);
+	console.log("start milesage = " + start);
 
 	var destenation;
 	var total_distance =	start + distance;
@@ -54,6 +58,16 @@ $('button').click(function()	{
 
 	console.log(destenation_index);
 
+	if (destenation_index == null || destenation_index == shelters.length - 1) {
+		destenation_index = shelters.length -2;
+	}
+
+	if (destenation_index == 1 || destenation_index == 0) {
+		destenation_index = 2;
+	}
+
+	console.log(destenation_index);
+
 	for (var i = destenation_index - 2; i < destenation_index + 2; i++)	{
 		$("#display").append('<p>');
 		$("#display").append(shelters[i][0]);
@@ -62,11 +76,13 @@ $('button').click(function()	{
 		$("#display").append('</p>');
 	}
 
+/*
 	shelters_reversed = shelters.reverse();
 
 	for (var i = 0; i < shelters_reversed.length; i++)	{
 		console.log(shelters_reversed[i][0]);
 	}
+*/
 
 });
 
@@ -77,3 +93,7 @@ shelters[1]	=	['Mt. Algo Shelter',				11.2];
 shelters[2]	=	['Stewart Hollow Brook Shelter',	18.5];
 shelters[3]	=	['Pine Swamp Brook Shelter',		28.5];
 shelters[4]	=	['Limestone Spring Shelter',		40.8];
+shelters[5] =	['Riga Shelter',					48.3];
+shelters[6] =	['Brassie Brook Shelter',			49.5];
+shelters[7] =	['The Hemlocks Shelter',			58.3];
+shelters[8] =	['Glen Brook Shelter',				58.4];
