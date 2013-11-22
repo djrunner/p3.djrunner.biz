@@ -4,23 +4,30 @@ var direction;
 
 $( document ).ready(function() {
 	for (var i = 0; i < shelters.length; i++)	{
-		$("#test").append("<option>" + shelters[i][0] + "</option");
+		$("#location_list").append("<option>" + shelters[i][0] + "</option");
 	}
 });
 
 $('#location').click(function() {
 	name = $('#location').find('option:selected').text();
+	console.log(name);
 });
 
+/*
 $('#distance').click(function() {
-	distance = parseInt($('#distance').find('option:selected').text());
+	distance = $("#distance_field").val();
+	console.log(distance);
 });
+*/
 
 $("input:radio[name=direction]").click(function() {
     direction =  "" + $(this).val();
 });
 
 $('button').click(function()	{
+
+	distance = parseFloat($("#distance_field").val());
+	console.log(distance)
 
 	if (name == null || distance == null || direction == null)	{
 		console.log("null!");
@@ -37,9 +44,15 @@ $('button').click(function()	{
 		}
 	}
 
+	console.log(start_position);
+
 	if (direction == "north")	{
 
 		end_position =	start_position + distance;
+
+		console.log(end_position);
+		console.log(start_position);
+		console.log(distance);
 
 		for (var i = 0; i < shelters.length; i++)	{
 			if (shelters[i][1] > end_position)	{
@@ -49,7 +62,8 @@ $('button').click(function()	{
 			} 	
 		}
 
-		
+		console.log(end_position_index);
+
 		if (end_position_index == null || end_position_index == shelters.length - 1) {
 			end_position_index = shelters.length -2;
 		}
@@ -58,12 +72,16 @@ $('button').click(function()	{
 			end_position_index = 2;
 		}
 
+		console.log(end_position_index);
+
+		$("#display_list").html("");
+
 		for (var i = end_position_index - 2; i < end_position_index + 2; i++)	{
-			$("#display").append('<p>');
-			$("#display").append(shelters[i][0]);
-			$("#display").append('&#09;');
-			$("#display").append(Math.round((shelters[i][1] - start_position) * 10) /10);
-			$("#display").append('</p>');
+			$("#display_list").append('<p>');
+			$("#display_list").append(shelters[i][0]);
+			$("#display_list").append('&#09;');
+			$("#display_list").append(Math.round((shelters[i][1] - start_position) * 10) /10);
+			$("#display_list").append('</p>');
 		}
 	}
 
@@ -96,12 +114,14 @@ $('button').click(function()	{
 
 		console.log(end_position_index);
 
+		$("#display_list").html("");
+
 		for (var i = end_position_index + 2; i > end_position_index - 2; i--)	{
-			$("#display").append('<p>');
-			$("#display").append(shelters[i][0]);
-			$("#display").append('&#09;');
-			$("#display").append(Math.round((start_position - shelters[i][1]) * 10) /10);
-			$("#display").append('</p>');
+			$("#display_list").append('<p>');
+			$("#display_list").append(shelters[i][0]);
+			$("#display_list").append('&#09;');
+			$("#display_list").append(Math.round((start_position - shelters[i][1]) * 10) /10);
+			$("#display_list").append('</p>');
 		}
 
 	}
