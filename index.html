@@ -14,58 +14,34 @@
 
 <body>
 
+<div id="master_box">
+
+	<div class="option_box" id="location">
+		<select id="location_list" size="8">
+		</select>
+	</div>
+
+	<div class="option_box" id="distance">
+		<p>
+			Distance to travel: <input type="textbox" id="distance_field"/>
+			<br/>
+	</div>
+
+	<div class="option_box" id="direction">
+			<p>Which Direction are you going?</p>
+			<input type="radio" name="direction" value="north"/>North
+			<input type="radio" name="direction" value="south"/>South
+		<br/><br/>
+	</div>
 
 
-<div id="location">
+	<div class="option_box" id="display">
 
-	<select name="locations_list" size="8">
-		<option>Connecticut-New York Line</option>
-		<option>Ten Mile River Shelter</option>
-		<option>Mt. Algo Shelter</option>
-		<option>Stewart Hollow Brook Shelter</option>
-		<option>Pine Swamp Brook Shelter</option>
-		<option>Limestone Spring Shelter</option>
-		<option>Riga Shelter</option>
-		<option>Brassie Brook Shelter</option>
-		<option>The Hemlocks Shelter</option>
-		<option>Glen Brook Shelter</option>
-		<option>Tom Leonard Shelter</option>
-		<option>Mt. Wilcox South Shelter</option>
-		<option>Mt. Wilcox North Shelter</option>
-		<option>Upper Goose Pond Cabin</option>
-		<option>October Mountian Shelter</option>
-		<option>Kay Wood Shelter</option>
-		<option>Mark Noepel Shelter</option>
-		<option>Wilbur Clearing Shelter</option>
-		<option>Vermont-Massachusetts Line</option>
-	</select>
-</div>
+		<button>Find Shelter</button>
 
-<div id="distance">
-
-	<select name="distance_list" size="4">
-		<option>10</option>
-		<option>20</option>
-		<option>30</option>
-		<option>40</option>
-		<option>50</option>
-	</select>
-</div>
-
-
-
-	<select id="test" size="4">
-	</select>
-
-
-<p>Which Direction are you going?</p>
-<input type="radio" name="direction" value="north"/>North
-<input type="radio" name="direction" value="south"/>South
-<br/><br/>
-
-<button>Find Shelter</button>
-
-<div id="display">
+		<div id="display_list">
+		</div>
+	</div>
 </div>
 
 	<script src="trial.js"></script>
