@@ -14,34 +14,46 @@
 
 <body>
 
+<div id="title">
+<h1>Shelter to Shelter</h1>
+<p>A tool for hikers on the Appalachian Trail</p>
+</div>
+
 <div id="master_box">
 
 	<div class="option_box" id="location">
-		<select id="location_list" size="8">
+		<h2>Step 1: </br>Pick Starting Location</h2>
+		<select id="location_list" size="12">
 		</select>
 	</div>
 
 	<div class="option_box" id="distance">
+		<h2>Step 2: </br>Pick Distance to Hike</h2>
 		<p>
-			Distance to travel: <input type="textbox" id="distance_field"/>
-			<br/>
+		<br/><br/>
+		Distance to travel: <input type="textbox" id="distance_field"/>
+		<br/>
 	</div>
 
 	<div class="option_box" id="direction">
-			<p>Which Direction are you going?</p>
-			<input type="radio" name="direction" value="north"/>North
-			<input type="radio" name="direction" value="south"/>South
+		<h2>Step 3: </br>Pick Directon to Hike</h2>
+		<br/>
+		<p>
+		<input type="radio" name="direction" value="north"/>North
+		<br/><br/><br/>
+		<input type="radio" name="direction" value="south"/>South
 		<br/><br/>
+		</p>
 	</div>
 
-
 	<div class="option_box" id="display">
-
+		<h2>Step 4: </br>Get Results!</h2>
 		<button>Find Shelter</button>
-
+		<br/>
 		<div id="display_list">
 		</div>
 	</div>
+	
 </div>
 
 	<script src="trial.js"></script>
