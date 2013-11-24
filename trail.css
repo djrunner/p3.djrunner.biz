@@ -1,0 +1,78 @@
+html 		{ 
+
+	background: url("images/test.jpg") no-repeat center center fixed; 
+	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+
+  	font-family: sans-serif;
+}
+
+#title  			{
+
+	text-align:  	center;
+	color:			#5E2612;
+	font-size:  	x-large;
+	font-weight:  	bold;
+	border-style:  	solid;
+	border-color:  	#090;
+	background-color: #060;
+	width: 			650px;
+	position:  		absolute;
+	left:			50%;
+	margin-left: 	-325px;
+}
+
+#title p  	{
+
+	color:			black;
+}
+
+#master_box	{
+
+	position: 		absolute;
+	top: 			50%;
+	left:			50%;
+	margin-top:  	-100px;
+	margin-left:  	-500px;
+
+}
+
+.option_box	{
+
+	float:			left;
+	height:  		400px;
+	width:  		250px;
+	border-style:  	solid;
+	border-color:  	#090;
+	background-color: #060;
+
+}
+
+.option_box h2		{
+
+	color:			#5E2612;
+	text-align:  	center;
+}
+
+.option_box p 		{
+
+	text-align:  	center;
+	font-weight: 	bold;
+	font-size:  	x-large;
+}
+
+
+#location select	{
+
+	background-color: #090;
+
+}
+
+#display_list  		{
+
+	text-align:  	center;
+	font-weight: 	bold;
+	font-size:  	large;
+}
