@@ -8,7 +8,8 @@
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="trial.css">
+	<link rel="stylesheet" type="text/css" href="trail.css">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 
 </head> 
 
@@ -23,8 +24,22 @@
 
 	<div class="option_box" id="location">
 		<h2>Step 1: </br>Pick Starting Location</h2>
-		<select id="location_list" size="12">
-		</select>
+		<div id="accordion">
+			
+		
+			<h3>Mass</h3>
+			<div>
+				<select id="location_list_mass" size="5">
+				</select>
+			</div>
+
+			<h3>Conn</h3>
+			<div>
+				<select id="location_list_conn" size="5">
+				</select>
+			</div>
+		</div>
+	
 	</div>
 
 	<div class="option_box" id="distance">
@@ -55,8 +70,8 @@
 	</div>
 	
 </div>
-
-	<script src="trial.js"></script>
+	<script src="trail.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 </body>
 
 </html>
