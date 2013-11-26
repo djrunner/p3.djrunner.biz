@@ -2,18 +2,52 @@ var name;
 var distance;
 var direction;
 
+$(function() {
+    $( "#accordion" ).accordion();
+  });
+
 $( document ).ready(function() {
-	for (var i = 0; i < shelters.length; i++)	{
-		$("#location_list").append("<option>" + shelters[i][0] + "</option");
+	
+	for (var i = 0; i < 8; i++)	{
+		$("#location_list_mass").append("<option>" + shelters[i][0] + "</option>");
 	}
 
-	$("#location select").simpleselect();
+	for (var i = 8; i < shelters.length; i++)	{
+		$("#location_list_conn").append("<option>" + shelters[i][0] + "</option>");
+	}
+
 });
 
-$('#location').click(function() {
-	name = $('#location').find('option:selected').text();
+$('#location_list_mass').click(function() {
+
+	name = $('#location_list_mass').find('option:selected').text();
+
 	console.log(name);
+
 });
+
+$('#location_list_conn').click(function() {
+
+	name = $('#location_list_conn').find('option:selected').text();
+
+	console.log(name);
+
+});
+
+	/*
+
+	if ($('#location_list_mass').find('option:selected').text()) 	{
+		name = $('#location_list_mass').find('option:selected').text();
+
+	} 
+	if ($('#location_list_conn').find('option:selected').text())	{
+		name = $('#location_list_conn').find('option:selected').text();
+	}
+
+	console.log(name);
+
+	*/
+
 
 /*
 $('#distance').click(function() {
@@ -29,10 +63,12 @@ $("input:radio[name=direction]").click(function() {
 $('button').click(function()	{
 
 	distance = parseFloat($("#distance_field").val());
-	console.log(distance)
+
 
 	if (name == null || distance == null || direction == null)	{
 		console.log("null!");
+		$("#display_list").append("<p>Incomplete Information</p>");
+		return;
 	}
 	
 	var start_position;
@@ -128,6 +164,10 @@ $('button').click(function()	{
 		}
 
 	}
+
+	name = null;
+	distance = null;
+	direction = null;
 
 
 });
