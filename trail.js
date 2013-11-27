@@ -237,6 +237,23 @@ shelters[61]	=	['Vandeventer Shelter, TN',			434.0];
 shelters[62]	=	['Iron Mountian Shelter, TN',		440.8];
 shelters[63]	=	['Abingdon Gap Shelter, TN',		456.7];
 
+shelters[64]	=	['Saunders Shelter, VA',			476.3];
+shelters[65]	=	['Lost Mountian Shelter, VA',		482.7];
+shelters[66]	=	['Thomas Knob Shelter, VA'			494.9];	
+shelters[67]	=	['Wise Shelter, VA'					500.0];
+shelters[68]	=	['Old Orchard Shelter, VA',			505.9];
+shelters[69]	=	['Hurricane Mountian Shelter, VA',	510.9];
+shelters[70]	=	['Trimpi Shelter, VA',				520.0];
+shelters[71]	=	['Partnership Shelter, VA',			530.6];
+shelters[72]	=	['Chatfield Shelter, VA',			537.7];
+shelters[73]	=	['Knot Maul Branch Shelter, VA',	556.1];
+shelters[74]	=	['Chestnut Knob Shelter, VA',		565.2];
+shelters[75]	=	['Jenkins Shelter, VA',				575.2];
+shelters[76]	=	['Helveys Mill Shelter, VA',		589.2];
+shelters[77]	=	['Jenny Knob Shelter, VA',			599.0];
+shelters[78]	=	['Wapiti Shelter, VA',				613.2];
+shelters[79]	=	["Doc's Knob Shelter, VA",			621.6];	
+
 /*
 shelters[0]		=	['Connecticut-New York Line',		0.0];
 shelters[1]		=	['Ten Mile River Shelter',			0.7];
