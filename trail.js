@@ -282,6 +282,60 @@ shelters[103]	=	['The Priest Shelter, VA',			822.2];
 shelters[104]	=	['Harpers Creek Shelter, VA',		829.8];
 shelters[105]	=	['Maupin Field Shelter, VA',		836.0];
 shelters[106]	=	['Paul C. Wolfe Shelter, VA',		851.8];
+
+shelters[107]	=	['Calf Mountian Shelter, VA',		863.8];
+shelters[108]	=	['Blackrock Hut, VA',				876.8];
+shelters[109]	=	['Pinefield Hut, VA',				890.0];
+shelters[110]	=	['Hightop Hut, VA',					898.4];
+shelters[111]	=	['Bearfence Mountian Hut, VA',		910.8];
+shelters[119]	=	['Rock Spring Cabin & Hut, VA',		922.3];
+shelters[120]	=	['Byrds Next #3 Shelter, VA',		933.2];
+shelters[121]	=	['Pass Mountian Hut, VA',			937.6];
+shelters[122]	=	['Gravel Springs Hut, VA',			950.7];
+shelters[123]	=	['Tom Floyd Wayside, VA',			961.2];
+shelters[124]	=	['Jim and Molly Denton Shelter, VA',969.3];
+shelters[125]	=	['Manassas Gap Shelter, VA',		974.8];
+shelters[126]	=	["Dick's Dome Shelter, VA",			979.3];
+shelters[127]	=	['Rod Hollow Shelter, VA',			987.7];
+shelters[128]	=	['Sam Moore Shelter, VA',			994.6];
+
+shelters[129]	=	['Blackburn Trial Center, W.VA',	1005.5];
+shelters[130]	=	['David Leser Memorial Shelter, W.VA',	1008.7];
+shelters[131]	=	['Harpers Ferry, W.VA',				1017.3];
+
+shelters[132]	=	['Ed Garvey Shelter, MD',			1024.3];
+shelters[133]	=	['Crampton Garvey Shelter, MD',		1028.4];
+shelters[134]	=	['Rocky Run Shelter, MD',			1033.4];
+shelters[135]	=	['Pine Knob Shelter, MD',			1041.9];
+shelters[136]	=	['Ensign Cowall Shelter, MD',		1050.1];
+shelters[137]	=	['Raven Rock Shelter, MD',			1050.0];
+
+shelters[138]	=	['Deer Lick Shelter, PA',			1059.6];
+shelters[139]	=	['Antietam Shelter, PA',			1062.0];
+shelters[140]	=	['Hermitage Cabin (Locked), PA',	1063.2];
+shelters[141]	=	['Rocky Mountian Shelter, PA',		1069.8];
+shelters[142]	=	['Quarry Gap Shelter, PA',			1075.4];
+shelters[143]	=	['Birch Run Shelter, PA',			1082.8];
+shelters[144]	=	['Toms Run Shelter, PA',			1087.0];
+shelters[145]	=	['James Fray Shelter, PA',			1097.9];
+shelters[146]	=	['Alec Kennedy Shelter, PA',		1106.0];
+shelters[147]	=	['Darlington Shelter, PA',			1124.2];
+shelters[148]	=	['Cove Mountian Shelter, AP',		1131.5];
+shelters[149]	=	['Clarks Ferry Shelter, PA',		1140.1];
+shelters[150]	=	['Peters Mountian Shelter, PA',		1146.5];
+shelters[151]	=	['Rausch Gap Shelter, PA',			1164.5];
+shelters[152]	=	['William Penn Shelter, PA',		1177.9];
+shelters[153]	=	['501 Shelter, PA',					1182.0];
+shelters[154]	=	["Eagle's Nest Shelter, PA",		1197.1];
+shelters[155]	=	['Windsor Furnace Shelter, PA',		1211.8];
+shelters[156]	=	['Eckville Shelter, PA',			1220.9];
+shelters[157]	=	['Allentown Hiking Club Shelter, PA',	1228.3];
+shelters[158]	=	['Bake Oven Knob Shelter, PA',		1238.3];
+shelters[159]	=	['George W. Outerbridge Shelter, PA',	1245.1];
+shelters[160]	=	['Leroy A. Smith Shelter, PA',		1261.8];
+shelters[161]	=	['Kirkridge Shelter, PA',			1275.6];
+
+
 /*
 shelters[0]		=	['Connecticut-New York Line',		0.0];
 shelters[1]		=	['Ten Mile River Shelter',			0.7];
