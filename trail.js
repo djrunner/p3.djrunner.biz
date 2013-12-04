@@ -1,10 +1,27 @@
-var name;
+/*
+ * Daniel Breidenbach
+ * CSCI-E 15 Fall 2013
+ * Project 3, Java Script App.
+ * JS file
+ */
+
+/*****Global variables*****/
+
+var name = null;
 var distance;
 var direction;
+
+/*****Jquery requred for accordian plug-in*****/
 
 $(function() {
     $( "#accordion" ).accordion();
   });
+
+/*
+ * JQuery needed to take data from the shelters[] array
+ * and put it into HTML as <option> tags.
+ * This follows the DRY principle
+ */
 
 $( document ).ready(function() {
 	
@@ -34,19 +51,17 @@ $( document ).ready(function() {
 
 });
 
+/*****JQuery code that instanciates a value to the name variable*****/
+
 $('#location_list_GA-NC').click(function() {
 
 	name = $('#location_list_GA-NC').find('option:selected').text();
-
-	console.log(name);
 
 });
 
 $('#location_list_TN').click(function() {
 
 	name = $('#location_list_TN-swVA').find('option:selected').text();
-
-	console.log(name);
 
 });
 
@@ -55,15 +70,11 @@ $('#location_list_TNcenoVA').click(function() {
 
 	name = $('#location_list_cenoVA').find('option:selected').text();
 
-	console.log(name);
-
 });
 
 $('#location_list_wVA-PA').click(function() {
 
 	name = $('#location_list_wVA-PA').find('option:selected').text();
-
-	console.log(name);
 
 });
 
@@ -71,58 +82,57 @@ $('#location_list_NJ-VT').click(function() {
 
 	name = $('#location_list_NJ-VT').find('option:selected').text();
 
-	console.log(name);
-
 });
 
 $('#location_list_NH-ME').click(function() {
 
 	name = $('#location_list_NH-ME').find('option:selected').text();
 
-	console.log(name);
-
 });
 
-	/*
-
-	if ($('#location_list_mass').find('option:selected').text()) 	{
-		name = $('#location_list_mass').find('option:selected').text();
-
-	} 
-	if ($('#location_list_conn').find('option:selected').text())	{
-		name = $('#location_list_conn').find('option:selected').text();
-	}
-
-	console.log(name);
-
-	*/
-
-
-/*
-$('#distance').click(function() {
-	distance = $("#distance_field").val();
-	console.log(distance);
-});
-*/
+/*****JQuery code that instanciates a value to the direction variable*****/
 
 $("input:radio[name=direction]").click(function() {
     direction =  "" + $(this).val();
 });
 
+/*
+ * This is the main function of the App.
+ * This button takes the stored value of "name", "direction" and "distance"
+ * and determines four shelters around the desiered goal.
+ */
+
 $('button').click(function()	{
+
+	/*****First, the distance entered by the user is grabbed and parsed as a Float*****/
 
 	distance = parseFloat($("#distance_field").val());
 
+	/*****If any of the three global variables are null, an error message is shown*****/
 
-	if (name == null || distance == null || direction == null)	{
-		console.log("null!");
+
+	if ( isNaN (distance) || name == 'null' || direction == undefined)	{
+		$("#display_list").html("");
 		$("#display_list").append("<p id='error'>Incomplete Information</p>");
 		return;
 	}
+
+	/*
+	 * Three local variables,
+	 * start_position and end_position are the absolute values of the milage
+	 * of a particular shelter from the southern end of the trail.
+	 * end_position_index is the index of the array at the desired destenation shelter.
+	 */
 	
 	var start_position;
 	var end_position;
 	var end_position_index;
+
+	/*
+	 * A for loop to determine the absolute milage of the selected starting location
+	 * For example, Woods Hole Shelter has an absolute milage of 28.1, because it's
+	 * 28.1 miles from the southern end of the trail (i.e. the begining of the array)
+	 */
 
 	for (var i = 0; i < shelters.length; i++)	{
 		if (name == shelters[i][0])	{
@@ -131,15 +141,26 @@ $('button').click(function()	{
 		}
 	}
 
-	console.log(start_position);
+	/*
+	 * If the direction selected is north, the array will be traversed in ascending order,
+	 * if the direction selected is south, the array will be traversed in descending order.
+	 */
 
 	if (direction == "north")	{
 
+		/*
+		 * the end_position will be the absolute milage of starting shelter selected
+		 * by the user and the distance entered by the user.
+		 */
+
 		end_position =	start_position + distance;
 
-		console.log(end_position);
-		console.log(start_position);
-		console.log(distance);
+		/*
+		 * this for loop goes through the array in ascending order (i.e. north through
+		 * the appalachian trail) until a shelter is found whose absolute milage is greater
+		 * than the end_position. when this shelter is found we break out of the for loop, saving 
+		 * the shelter and the index of the shelter in the array.
+		 */
 
 		for (var i = 0; i < shelters.length; i++)	{
 			if (shelters[i][1] > end_position)	{
@@ -149,7 +170,12 @@ $('button').click(function()	{
 			} 	
 		}
 
-		console.log(end_position_index);
+		/* The following code is to take care of special cases. Either the end_postion is
+		 * at the very end or very begining of the array. If this is the case, the end_position_index
+		 * is moved up or back.
+		 * This is because four total shelters will displayed on the page, two before the desired distance
+		 * and two after the desired distance from the starting shelter.
+		 */
 
 		if (end_position_index == null || end_position_index == shelters.length - 1) {
 			end_position_index = shelters.length -2;
@@ -159,7 +185,12 @@ $('button').click(function()	{
 			end_position_index = 2;
 		}
 
-		console.log(end_position_index);
+		/* This last set of code takes the data for the four shelters to be displayed to the user and 
+		 * displays them on the page. 
+		 * Again, it will display two shelters located before the desired distance from the starting shelter,
+		 * and two sheleters located after the desired distance from the starting shelter.
+		 * This will be done with Jquery appending <p> tags to the #display_list .option_box.
+		 */
 
 		$("#display_list").html("");
 
@@ -177,6 +208,8 @@ $('button').click(function()	{
 
 		end_position =	start_position - distance;
 
+		/***** Similar to the code for "north", except the array is travsered through in reverse order*****/
+
 		for (var i = shelters.length - 1; i >= 0; i--)	{
 			if (shelters[i][1] < end_position)	{
 				end_position = shelters[i][0];
@@ -185,22 +218,17 @@ $('button').click(function()	{
 			} 	
 		}
 
-		console.log(end_position_index);
-
 		if (end_position_index == null || 
 			end_position_index == 0) {
 
 			end_position_index = 1;
 		}
 
-
 		if (end_position_index == shelters.length - 1 || 
 			end_position_index == shelters.length - 2) {
 
 			end_position_index = shelters.length - 3;
 		}
-
-		console.log(end_position_index);
 
 		$("#display_list").html("");
 
@@ -218,19 +246,26 @@ $('button').click(function()	{
 
 });
 
+/*
+ * The array list of shelters.
+ * This data was taken from "Appalachian Trial Data Book 2012",
+ * published by the Appalachian Trail Conservancy
+ */
+
+
 var shelters	=	[];
 
 shelters[0]		=	['Southern End of Appalachian Trial',	0.0];
 shelters[1]		=	['Springer Mountian Shelter, GA',	0.2];
 shelters[2]		=	['Stover Creek Shelter, GA',		2.8];
-shelters[3]		=	['Hawk Mountian Shelter, GA',		8.1];
-shelters[4]		=	['Gooch Mountian Shelter, GA',		15.8];
+shelters[3]		=	['Hawk Mountain Shelter, GA',		8.1];
+shelters[4]		=	['Gooch Mountain Shelter, GA',		15.8];
 shelters[5]		=	['Woods Hole Shelter, GA',			28.1];
-shelters[6]		=	['Blood Mountian Shelter, GA',		29.3];
+shelters[6]		=	['Blood Mountain Shelter, GA',		29.3];
 shelters[7]		=	['Whitley Gap Shelter, GA',			38.4];
 shelters[8]		=	['Low Gap Shelter, GA',				43.2];
-shelters[9]		=	['Blue Mountian Shelter, GA',		50.5];
-shelters[10]	=	['Tray Mountian Shelter, GA',		58.6];
+shelters[9]		=	['Blue Mountain Shelter, GA',		50.5];
+shelters[10]	=	['Tray Mountain Shelter, GA',		58.6];
 shelters[11]	=	['Deep Gap Shelter, GA',			66.0];
 shelters[12]	=	['Plumorchard Gap Shelter, GA',		74.1];
 
@@ -262,14 +297,14 @@ shelters[37]	=	['Cosby Knob Shelter, NC',			230.1];
 shelters[38]	=	['Davenport Gap Shelter, NC',		238.1];
 shelters[39]	=	['Groundhog Creek Shelter, NC',		247.7];
 shelters[40]	=	['Roaring Fork Shelter, NC',		255.9];
-shelters[41]	=	['Walnut Mountian Shelter, NC',		260.8];
-shelters[42]	=	['Deer Park Mountian Shelter, NC',	270.7];
-shelters[43]	=	['Spring Mountian Spring, NC',		284.9];
+shelters[41]	=	['Walnut Mountain Shelter, NC',		260.8];
+shelters[42]	=	['Deer Park Mountain Shelter, NC',	270.7];
+shelters[43]	=	['Spring Mountain Spring, NC',		284.9];
 shelters[44]	=	['Little Laurel Shelter, NC',		293.5];
 shelters[45]	=	['Jerry Cabin Shelter, NC',			300.3];
-shelters[46]	=	['Flint Mountian Shelter, NC',		306.2];
+shelters[46]	=	['Flint Mountain Shelter, NC',		306.2];
 shelters[47]	=	['Hogback Ridge	 Shelter, NC',		315.0];
-shelters[48]	=	['Bald Mountian Shelter, NC',		325.1];
+shelters[48]	=	['Bald Mountain Shelter, NC',		325.1];
 shelters[49]	=	['No Buisness Knob Shelter, NC',	335.7];
 
 shelters[50]	=	['Curley Maple Gap Shelter, TN',	346.2];
@@ -284,15 +319,15 @@ shelters[58]	=	['Moreland Gap Shelter, TN',		410.3];
 shelters[59]	=	['Laurel Fork Shelter, TN',			418.2];
 shelters[60]	=	['Watauga Lake Shelter, TN',		426.8];
 shelters[61]	=	['Vandeventer Shelter, TN',			434.0];
-shelters[62]	=	['Iron Mountian Shelter, TN',		440.8];
+shelters[62]	=	['Iron Mountain Shelter, TN',		440.8];
 shelters[63]	=	['Abingdon Gap Shelter, TN',		456.7];
 
 shelters[64]	=	['Saunders Shelter, VA',			476.3];
-shelters[65]	=	['Lost Mountian Shelter, VA',		482.7];
+shelters[65]	=	['Lost Mountain Shelter, VA',		482.7];
 shelters[66]	=	['Thomas Knob Shelter, VA',			494.9];	
 shelters[67]	=	['Wise Shelter, VA'	,				500.0];
 shelters[68]	=	['Old Orchard Shelter, VA',			505.9];
-shelters[69]	=	['Hurricane Mountian Shelter, VA',	510.9];
+shelters[69]	=	['Hurricane Mountain Shelter, VA',	510.9];
 shelters[70]	=	['Trimpi Shelter, VA',				520.0];
 shelters[71]	=	['Partnership Shelter, VA',			530.6];
 shelters[72]	=	['Chatfield Shelter, VA',			537.7];
@@ -312,20 +347,20 @@ shelters[84]	=	['Laurel Creek Shelter, VA',		667.6];
 shelters[85]	=	['Sarver Hollow Shelter, VA',		674.0];
 shelters[86]	=	['Niday Shelter, VA',				680.0];
 shelters[87]	=	['Pickle Branch Shelter, VA',		690.1];
-shelters[88]	=	['Catawba Mountian Shelter, VA',	704.7];
+shelters[88]	=	['Catawba Mountain Shelter, VA',	704.7];
 shelters[89]	=	['Campbell Shelter, VA',			708.1];
 shelters[90]	=	['Lamberts Meadow Shelter, VA',		713.1];
 shelters[91]	=	['Fullhardt Knob Shelter, VA',		727.5];
 shelters[92]	=	['Wilson Creek Shelter, VA',		733.7];
 shelters[93]	=	['Bobblets Gap Shelter, VA',		741.0];
-shelters[94]	=	['Cove Mountian Shelter, VA',		747.5];
+shelters[94]	=	['Cove Mountain Shelter, VA',		747.5];
 shelters[95]	=	['Bryant Ridge Shelter, VA',		754.5];
 shelters[96]	=	['Cornelius Creek Shelter, VA',		759.4];
 shelters[97]	=	['Thunder Hill Shelter, VA',		764.7];
 shelters[98]	=	['Matts Creek Shelter, VA',			777.1];
 shelters[99]	=	['Johns Hollow Shelter, VA',		781.0];
 shelters[100]	=	['Punchbowl Shelter, VA',			789.8];
-shelters[101]	=	['Brown Mountian Creek Shelter, VA',799.3];
+shelters[101]	=	['Brown Mountain Creek Shelter, VA',799.3];
 shelters[101]	=	['Cow Camp Gap Shelter, VA',		804.9];
 shelters[102]	=	['Seeley-Woodworth Shelter, VA',	815.1];
 shelters[103]	=	['The Priest Shelter, VA',			822.2];
@@ -390,111 +425,111 @@ shelters[154]	=	['Anderson Shelter, NJ',			1313.4];
 shelters[155]	=	['Mashipacong Shelter, NJ',			1320.2];
 shelters[156]	=	['High Point Shelter, NJ',			1327.2];
 shelters[157]	=	['Pochunch Mountian Shelter, NJ',	1239.6];
-shelters[158]	=	['Wawayanda Shelter, NJ',			1251.1];
+shelters[158]	=	['Wawayanda Shelter, NJ',			1351.1];
 
-shelters[159]	=	['Wildcat Shelter, NY',				1263.2];
-shelters[160]	=	['Fingerboard Shelter, NY',			1276.5];
-shelters[161]	=	['William Brien Shelter, NY',		1281.8];
-shelters[162]	=	['West Mountian Shelter, NY',		1284.9];
-shelters[163]	=	['RPH Shelter, NY',					1317.1];
-shelters[164]	=	['Morgan Stewart Shelter, NY',		1226.1];
-shelters[165]	=	['Telephone Pioneers Shelter, NY',	1233.9];
-shelters[166]	=	['Wiley Shelter, NY',				1242.7];
+shelters[159]	=	['Wildcat Shelter, NY',				1363.2];
+shelters[160]	=	['Fingerboard Shelter, NY',			1376.5];
+shelters[161]	=	['William Brien Shelter, NY',		1381.8];
+shelters[162]	=	['West Mountian Shelter, NY',		1384.9];
+shelters[163]	=	['RPH Shelter, NY',					1417.1];
+shelters[164]	=	['Morgan Stewart Shelter, NY',		1426.1];
+shelters[165]	=	['Telephone Pioneers Shelter, NY',	1433.9];
+shelters[166]	=	['Wiley Shelter, NY',				1442.7];
 
-shelters[167]	=	['Ten Mile River Shelter, CT',		1246.7];
-shelters[168]	=	['Mt. Algo Shelter, CT',			1255.1];
-shelters[169]	=	['Stewart Hollow Brook Shelter, CT',1262.4];
-shelters[170]	=	['Pine Swamp Brook Shelter, CT',	1272.4];
-shelters[171]	=	['Limestone Spring Shelter, CT',	1284.7];
-shelters[172] 	=	['Riga Shelter, CT',				1292.2];
-shelters[173] 	=	['Brassie Brook Shelter, CT',		1293.4];
+shelters[167]	=	['Ten Mile River Shelter, CT',		1446.7];
+shelters[168]	=	['Mt. Algo Shelter, CT',			1455.1];
+shelters[169]	=	['Stewart Hollow Brook Shelter, CT',1462.4];
+shelters[170]	=	['Pine Swamp Brook Shelter, CT',	1472.4];
+shelters[171]	=	['Limestone Spring Shelter, CT',	1484.7];
+shelters[172] 	=	['Riga Shelter, CT',				1492.2];
+shelters[173] 	=	['Brassie Brook Shelter, CT',		1493.4];
 
-shelters[174] 	=	['The Hemlocks Shelter, MA',		1302.2];
-shelters[175] 	=	['Glen Brook Shelter, MA',			1302.3];
-shelters[176] 	=	['Tom Leonard Shelter, MA',			1316.6];
-shelters[177]	=	['Mt. Wilcox South Shelter, MA',	1321.9];
-shelters[178]	=	['Mt. Wilcox North Shelter, MA',	1323.7];
-shelters[179]	=	['Upper Goose Pond Cabin, MA',		1337.7];
-shelters[180]	=	['October Mountian Shelter, MA',	1346.5];
-shelters[181]	=	['Kay Wood Shelter, MA',			1355.3];
-shelters[182]	=	['Mark Noepel Shelter, MA',			1372.2];
-shelters[183]	=	['Wilbur Clearing Shelter, MA',		1378.8];
+shelters[174] 	=	['The Hemlocks Shelter, MA',		1502.2];
+shelters[175] 	=	['Glen Brook Shelter, MA',			1502.3];
+shelters[176] 	=	['Tom Leonard Shelter, MA',			1516.6];
+shelters[177]	=	['Mt. Wilcox South Shelter, MA',	1521.9];
+shelters[178]	=	['Mt. Wilcox North Shelter, MA',	1523.7];
+shelters[179]	=	['Upper Goose Pond Cabin, MA',		1537.7];
+shelters[180]	=	['October Mountian Shelter, MA',	1546.5];
+shelters[181]	=	['Kay Wood Shelter, MA',			1555.3];
+shelters[182]	=	['Mark Noepel Shelter, MA',			1572.2];
+shelters[183]	=	['Wilbur Clearing Shelter, MA',		1578.8];
 
-shelters[184]	=	['Seth Warner Shelter, VT',			1388.7];
-shelters[185]	=	['Congdon Shelter, VT',				1395.9];
-shelters[186]	=	['Melville Nauheim Shelter, VT',	1400.8];
-shelters[187]	=	['Goddard Shelter, VT',				1409.3];
-shelters[188]	=	['Kid Gore Shelter, VT',			1413.6];
-shelters[189]	=	['Story Spring Shelter, VT',		1418.2];
-shelters[190]	=	['Stratton Pond Shelter, VT',		1428.6];
-shelters[191]	=	['William B. Douglas Shelter, VT',	1429.1];
-shelters[192]	=	['Spruce Peak Shelter, VT',			1432.1];
-shelters[193]	=	['Bromley Shelter, VT',				1436.9];
-shelters[194]	=	['Peru Peak Shelter, VT',			1445.0];
-shelters[195]	=	['Lost Pond Shelter, VT',			1453.7];
-shelters[196]	=	['Old Job Shelter, VT',				1455.2];
-shelters[197]	=	['Big Branch Shelter, VT',			1455.4];
-shelters[198]	=	['Little Rock Pond Shelter, VT',	1458.7];
-shelters[199]	=	['Greenwall Shelter, VT',			1463.5];
-shelters[200]	=	['Minerva Hinchey Shelter, VT',		1468.6];
-shelters[201]	=	['Clarendon Shelter, VT',			1472.3];
-shelters[202]	=	['Governor Clement Shelter, VT',	1481.1];
-shelters[203]	=	['Cooper Lodge, VT',				1485.4];
-shelters[204]	=	['Churchill Scott Shelter, VT',		1489.8];
-shelters[205]	=	['Stony Brook Shelter, VT',			1501.7];
-shelters[206]	=	['Wintturi Shelter, VT',			1511.6];
-shelters[207]	=	['Thistle Hill Shelter, VT',		1523.2];
-shelters[208]	=	['Happy Hill Shelter, VT',			1532.0];
+shelters[184]	=	['Seth Warner Shelter, VT',			1588.7];
+shelters[185]	=	['Congdon Shelter, VT',				1595.9];
+shelters[186]	=	['Melville Nauheim Shelter, VT',	1600.8];
+shelters[187]	=	['Goddard Shelter, VT',				1609.3];
+shelters[188]	=	['Kid Gore Shelter, VT',			1613.6];
+shelters[189]	=	['Story Spring Shelter, VT',		1618.2];
+shelters[190]	=	['Stratton Pond Shelter, VT',		1628.6];
+shelters[191]	=	['William B. Douglas Shelter, VT',	1629.1];
+shelters[192]	=	['Spruce Peak Shelter, VT',			1632.1];
+shelters[193]	=	['Bromley Shelter, VT',				1636.9];
+shelters[194]	=	['Peru Peak Shelter, VT',			1645.0];
+shelters[195]	=	['Lost Pond Shelter, VT',			1653.7];
+shelters[196]	=	['Old Job Shelter, VT',				1655.2];
+shelters[197]	=	['Big Branch Shelter, VT',			1655.4];
+shelters[198]	=	['Little Rock Pond Shelter, VT',	1658.7];
+shelters[199]	=	['Greenwall Shelter, VT',			1663.5];
+shelters[200]	=	['Minerva Hinchey Shelter, VT',		1668.6];
+shelters[201]	=	['Clarendon Shelter, VT',			1672.3];
+shelters[202]	=	['Governor Clement Shelter, VT',	1681.1];
+shelters[203]	=	['Cooper Lodge, VT',				1685.4];
+shelters[204]	=	['Churchill Scott Shelter, VT',		1689.8];
+shelters[205]	=	['Stony Brook Shelter, VT',			1701.7];
+shelters[206]	=	['Wintturi Shelter, VT',			1711.6];
+shelters[207]	=	['Thistle Hill Shelter, VT',		1723.2];
+shelters[208]	=	['Happy Hill Shelter, VT',			1732.0];
 
-shelters[209]	=	['Velvet Rocks Shelter, NH',		1539.3];
-shelters[210]	=	['Moose Mountian Shelter, NH',		1548.8];
-shelters[211]	=	['Trapper John Shelter, NH',		1555.5];
-shelters[212]	=	["Firewarden's Cabin, NH",			1562.2];
-shelters[213]	=	['Hexacuba Shelter, NH',			1567.5];
-shelters[214]	=	['Ore Hill Shelter, NH',			1584.6];
-shelters[215]	=	['Jeffers Brook Shelter, NH',		1593.2];
-shelters[216]	=	['Beaver Brook Shelter, NH',		1600.1];
-shelters[217]	=	['Eliza Brook Shelter, NH',			1609.1];
-shelters[218]	=	['Kinsman Pond Shelter, NH',		1613.1];
-shelters[219]	=	['Garfield Ridge Shelter, NH',		1628.2];
-shelters[220]	=	['Guyut Shelter, NH',				1634.0];
-shelters[221]	=	['Ethan Pond Shelter, NH',			1643.0];
-shelters[222]	=	['The Pearch Shelter, NH',			1662.6];
-shelters[223]	=	['Gray Knob Cabin, NH',				1663.2];
-shelters[224]	=	['Imp Shelter, NH',					1685.0];
-shelters[225]	=	['Rattle River Shelter, NH',		1691.1];
-shelters[226]	=	['Gentian Pond Shelter, NH',		1704.8];
+shelters[209]	=	['Velvet Rocks Shelter, NH',		1739.3];
+shelters[210]	=	['Moose Mountian Shelter, NH',		1748.8];
+shelters[211]	=	['Trapper John Shelter, NH',		1755.5];
+shelters[212]	=	["Firewarden's Cabin, NH",			1762.2];
+shelters[213]	=	['Hexacuba Shelter, NH',			1767.5];
+shelters[214]	=	['Ore Hill Shelter, NH',			1784.6];
+shelters[215]	=	['Jeffers Brook Shelter, NH',		1793.2];
+shelters[216]	=	['Beaver Brook Shelter, NH',		1800.1];
+shelters[217]	=	['Eliza Brook Shelter, NH',			1809.1];
+shelters[218]	=	['Kinsman Pond Shelter, NH',		1813.1];
+shelters[219]	=	['Garfield Ridge Shelter, NH',		1828.2];
+shelters[220]	=	['Guyut Shelter, NH',				1834.0];
+shelters[221]	=	['Ethan Pond Shelter, NH',			1843.0];
+shelters[222]	=	['The Pearch Shelter, NH',			1862.6];
+shelters[223]	=	['Gray Knob Cabin, NH',				1863.2];
+shelters[224]	=	['Imp Shelter, NH',					1885.0];
+shelters[225]	=	['Rattle River Shelter, NH',		1891.1];
+shelters[226]	=	['Gentian Pond Shelter, NH',		1904.8];
 
-shelters[227]	=	['Carlo Cal Shelter, ME',			1710.0];
-shelters[228]	=	['Full Goose Shelter, ME',			1714.4];
-shelters[229]	=	['Baldpate Lean-to, ME',			1726.4];
-shelters[230]	=	['Frye Notch Lean-to, ME',			1729.9];
-shelters[231]	=	['Hall Mountian Lean-to, ME',		1740.4];
-shelters[232]	=	['Bemis Mountian Lean-to, ME',		1753.2];
-shelters[233]	=	['Sabbath Day Pond Lean-to, ME',	1761.5];
-shelters[234]	=	['Pizza Rock Lean-to, ME',			1772.7];
-shelters[235]	=	['Poplar Ridge Lean-to, ME',		1781.6];
-shelters[236]	=	['Spaulding Mountian Lean-to, ME',	1789.6];
-shelters[237]	=	['Horns Pond Lean-tos, ME',			1808.2];
-shelters[238]	=	['Little Bigelow Lean-to, ME',		1818.4];
-shelters[239]	=	['West Carry Pond Lean-to, ME',		1826.1];
-shelters[240]	=	['Pierce Pond Lean-to, ME',			1836.1];
-shelters[241]	=	['Pleasant Pond Lean-to, ME',		1845.8];
-shelters[242]	=	['Bald Mountian Brook Lean-to, ME',	1854.8];
-shelters[243]	=	['Moxie Bald Lean-to, ME',			1858.9];
-shelters[244]	=	['Horseshoe Canyon Lean-to, ME',	1867.8];
-shelters[245]	=	['Leeman Brook Lean-to, ME',		1879.8];
-shelters[246]	=	['Wilson Valley Lean-to, ME',		1888.2];
-shelters[247]	=	['Long Pond Stream Lean-to, ME',	1892.9];
-shelters[248]	=	['Cloud Pond Lean-to, ME',			1896.2];
-shelters[249]	=	['Chairback Gap Lean-to, ME',		1903.1];
-shelters[250]	=	['Carl A. Newhall Lean-to, ME',		1913.0];
-shelters[251]	=	['Logan Brook Lean-to, ME',			1919.2];
-shelters[252]	=	['East Branch Lean-to, ME',			1922.8];
-shelters[253]	=	['Cooper Brook Falls Lean-to, ME',	1930.9];
-shelters[254]	=	['Potaywadjo Spring Lean-to, ME',	1942.3];
-shelters[255]	=	['Wadleigh Stream Lean-to, ME',		1953.4];
-shelters[256]	=	['Rainbow Stream Lean-to, ME',		1961.5];
-shelters[257]	=	['Hurd Brook Shelter, ME',			1969.0];
-shelters[258]	=	['Birches Campsite, ME'	,			1982.4];
-shelters[259]	=	['Northern End of Appalachian Trial',	1987.6];
+shelters[227]	=	['Carlo Cal Shelter, ME',			1910.0];
+shelters[228]	=	['Full Goose Shelter, ME',			1914.4];
+shelters[229]	=	['Baldpate Lean-to, ME',			1926.4];
+shelters[230]	=	['Frye Notch Lean-to, ME',			1929.9];
+shelters[231]	=	['Hall Mountian Lean-to, ME',		1940.4];
+shelters[232]	=	['Bemis Mountian Lean-to, ME',		1953.2];
+shelters[233]	=	['Sabbath Day Pond Lean-to, ME',	1961.5];
+shelters[234]	=	['Pizza Rock Lean-to, ME',			1972.7];
+shelters[235]	=	['Poplar Ridge Lean-to, ME',		1981.6];
+shelters[236]	=	['Spaulding Mountian Lean-to, ME',	1989.6];
+shelters[237]	=	['Horns Pond Lean-tos, ME',			2008.2];
+shelters[238]	=	['Little Bigelow Lean-to, ME',		2018.4];
+shelters[239]	=	['West Carry Pond Lean-to, ME',		2026.1];
+shelters[240]	=	['Pierce Pond Lean-to, ME',			2036.1];
+shelters[241]	=	['Pleasant Pond Lean-to, ME',		2045.8];
+shelters[242]	=	['Bald Mountian Brook Lean-to, ME',	2054.8];
+shelters[243]	=	['Moxie Bald Lean-to, ME',			2058.9];
+shelters[244]	=	['Horseshoe Canyon Lean-to, ME',	2067.8];
+shelters[245]	=	['Leeman Brook Lean-to, ME',		2079.8];
+shelters[246]	=	['Wilson Valley Lean-to, ME',		2088.2];
+shelters[247]	=	['Long Pond Stream Lean-to, ME',	2092.9];
+shelters[248]	=	['Cloud Pond Lean-to, ME',			2096.2];
+shelters[249]	=	['Chairback Gap Lean-to, ME',		2103.1];
+shelters[250]	=	['Carl A. Newhall Lean-to, ME',		2113.0];
+shelters[251]	=	['Logan Brook Lean-to, ME',			2119.2];
+shelters[252]	=	['East Branch Lean-to, ME',			2122.8];
+shelters[253]	=	['Cooper Brook Falls Lean-to, ME',	2130.9];
+shelters[254]	=	['Potaywadjo Spring Lean-to, ME',	2142.3];
+shelters[255]	=	['Wadleigh Stream Lean-to, ME',		2153.4];
+shelters[256]	=	['Rainbow Stream Lean-to, ME',		2161.5];
+shelters[257]	=	['Hurd Brook Shelter, ME',			2169.0];
+shelters[258]	=	['Birches Campsite, ME'	,			2182.4];
+shelters[259]	=	['Northern End of Appalachian Trial',	2187.6];
