@@ -424,7 +424,7 @@ shelters[155]	=	['Brink Road Shelter, NJ',			1306.8];
 shelters[154]	=	['Anderson Shelter, NJ',			1313.4];
 shelters[155]	=	['Mashipacong Shelter, NJ',			1320.2];
 shelters[156]	=	['High Point Shelter, NJ',			1327.2];
-shelters[157]	=	['Pochunch Mountian Shelter, NJ',	1239.6];
+shelters[157]	=	['Pochunch Mountian Shelter, NJ',	1339.6];
 shelters[158]	=	['Wawayanda Shelter, NJ',			1351.1];
 
 shelters[159]	=	['Wildcat Shelter, NY',				1363.2];
