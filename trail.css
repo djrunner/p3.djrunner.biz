@@ -1,3 +1,12 @@
+/*
+ * Daniel Breidenbach
+ * CSCI-E 15 Fall 2013
+ * Project 3, Java Script App.
+ * CSS file
+ */
+
+ /******Background Image and font setting*****/
+
 html 		{ 
 
 	background: url("images/test.jpg") no-repeat center center fixed; 
@@ -9,11 +18,13 @@ html 		{
   	font-family: sans-serif;
 }
 
+/******Title Box*****/
+
 #title  			{
 
 	text-align:  	center;
 	color:			#5E2612;
-	font-size:  	x-large;
+	font-size:  	large;
 	font-weight:  	bold;
 	border-style:  	solid;
 	border-color:  	#090;
@@ -29,6 +40,8 @@ html 		{
 	color:			black;
 }
 
+/*****CSS for main box, which is made up of three smaller option boxes*****/
+
 #master_box	{
 
 	position: 		absolute;
@@ -38,6 +51,8 @@ html 		{
 	margin-left:  	-450px;
 
 }
+
+/*****CSS for a set of three option boxes, each within the main box*****/
 
 .option_box	{
 
@@ -63,6 +78,7 @@ html 		{
 	font-size:  	x-large;
 }
 
+/*****CSS for the select boxes within the location option box*****/
 
 #location select	{
 
@@ -78,10 +94,7 @@ html 		{
 	font-size:  	large;
 }
 
-#location_list_mass	{
-
-	float:  		left;
-}
+/*****Required CSS for accordian Jquery*****/
 
 select {
     padding:3px;
